@@ -1,0 +1,148 @@
+html, body {
+  margin: 0;
+  padding: 0;
+  background-color: #faf1fc;
+  font-family: "Helvetica Neue", Helvetica, Arial, sans-serif;
+}
+
+header {
+  width: 100%;
+  height: 80px;
+  background-color: #d86af3;
+  padding: 0 30px;
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  box-sizing: border-box;
+  color: white;
+}
+
+main {
+  margin: 40px;
+}
+
+.new-task-panel {
+  padding: 30px;
+  background-color: white;
+  border-radius: 20px;
+  display: inline-flex;
+  flex-direction: column;
+  gap: 20px;
+}
+
+.new-task-panel h2 {
+  margin: 0;
+  color: #3d0e49;
+}
+
+.new-task-panel form {
+  margin: 0;
+}
+
+.new-task-panel input {
+  font-size: 18px;
+  padding: 10px;
+  border: 2px solid #ccc;
+  border-radius: 10px;
+}
+
+.add-button {
+  margin-left: 10px;
+  font-size: 18px;
+  color: white;
+  border-radius: 10px;
+  background-color: #d86af3;
+  padding: 10px 20px;
+  border: none;
+}
+
+.add-button:hover {
+  background-color: #f5ccff;
+  color: #3d0e49;
+  cursor: pointer;
+  transition: 0.2s;
+}
+
+.task-board {
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(150px, 1fr));
+  gap: 10px;
+  max-width: 1400px;
+  margin-top: 30px;
+}
+
+.task-type {
+  font-size: 18px;
+  padding: 20px 30px;
+  justify-self: start;
+  border-radius: 10px;
+}
+
+.backlog-tasks .task-type {
+  background-color: #bdd6a1;
+  color: #53683b;
+}
+
+.processing-tasks .task-type {
+  background-color: #edf1d2;
+  color: #646848;
+}
+
+.done-tasks .task-type {
+  background-color: #cbe1e7;
+  color: #486972;
+}
+
+.bin .task-type {
+  background-color: #f1e3df;
+  color: #4e3131;
+}
+
+.task-list {
+  list-style: none;
+  padding-left: 0;
+}
+
+.task-list li {
+  max-width: 225px;
+  font-size: 16px;
+  background-color: white;
+  border-radius: 8px;
+  padding: 20px;
+  margin-bottom: 10px;
+}
+
+.backlog-tasks li {
+  border-left: 5px solid #bdd6a1;
+}
+
+.processing-tasks li {
+  border-left: 5px solid #edf1d2;
+}
+
+.done-tasks li {
+  border-left: 5px solid #cbe1e7;
+}
+
+.bin li {
+  border-left: 5px solid #f1e3df;
+}
+
+.clear-button {
+  background-color: #882727;
+  color: white;
+  font-size: 16px;
+  border-radius: 10px;
+  margin-top: 10px;
+  padding: 20px;
+  border: none;
+  width: 100%;
+  max-width: 270px;
+}
+
+.clear-button:hover {
+  background-color: #ebcaca;
+  color: #882727;
+  cursor: pointer;
+  transition: 0.2s;
+}
