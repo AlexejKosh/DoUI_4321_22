@@ -1,0 +1,14 @@
+html, body {
+  margin: 0;
+  padding: 0;
+  background-color: #faf1fc;
+  font-family: "Helvetica Neue", Helvetica, Arial, sans-serif;
+}
+
+form {
+  margin: 0;
+}
+
+h2 {
+  margin-top: 0px;
+}
