@@ -66,8 +66,30 @@ main {
   padding: 20px 30px;
   justify-self: start;
   border-radius: 10px;
+}
+
+.tasks-column-backlog .task-type {
+  background-color: #dab8fa;
+  color: #5b2161;
+}
+
+.tasks-column-processing .task-type {
   background-color: #e19ae7;
   color: #5b2161;
+}
+
+.tasks-column-done .task-type {
+  background-color: #f0a0ba;
+  color: #5b2161;
+}
+
+.tasks-column-bin .task-type {
+  background-color: #d66060;
+  color: #470a0a;
+}
+
+.task__body p {
+  margin: 0;
 }
 
 .task-list {
@@ -75,14 +97,34 @@ main {
   padding-left: 0;
 }
 
-.task-list li {
+.task-list .task-li {
   max-width: 225px;
   font-size: 16px;
   background-color: white;
   border-radius: 8px;
   padding: 20px;
   margin-bottom: 10px;
+}
+
+.task-li.backlog {
+  border-left: 5px solid #dab8fa;
+}
+
+.task-li.processing {
   border-left: 5px solid #e19ae7;
+}
+
+.task-li.done {
+  border-left: 5px solid #f0a0ba;
+}
+
+.task-li.bin {
+  border-left: 5px solid #d66060;
+}
+
+.task__input,
+.task__edit {
+  display: none;
 }
 
 .clear-button {
