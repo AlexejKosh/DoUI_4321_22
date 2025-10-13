@@ -1,4 +1,4 @@
-import {createElement} from '../framework/render.js'; 
+import { AbstractComponent } from '../framework/view/abstract-component.js';
 
 function createCleanBinComponentTemplate() {
   return (
@@ -8,20 +8,8 @@ function createCleanBinComponentTemplate() {
   );
 }
 
-export default class CleanBinComponent {
-  getTemplate() {
+export default class CleanBinComponent extends AbstractComponent {
+  get template() {
     return createCleanBinComponentTemplate();
-  }
-
-  getElement() {
-    if (!this.element) {
-      this.element = createElement(this.getTemplate());
-    }
-
-    return this.element;
-  }
-
-  removeElement() {
-    this.element = null;
   }
 }

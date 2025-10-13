@@ -122,6 +122,34 @@ main {
   border-left: 5px solid #d66060;
 }
 
+.task-list .empty-task {
+  max-width: 225px;
+  font-size: 16px;
+  border-radius: 8px;
+  padding: 20px;
+  margin-bottom: 10px;
+}
+
+.empty-task.backlog {
+  color: #dab8fa;
+  border: 2px solid #dab8fa;
+}
+
+.empty-task.processing {
+  color: #e19ae7;
+  border: 2px solid #e19ae7;
+}
+
+.empty-task.done {
+  color: #f0a0ba;
+  border: 2px solid #f0a0ba;
+}
+
+.empty-task.bin {
+  color: #d66060;
+  border: 2px solid #d66060;
+}
+
 .task__input,
 .task__edit {
   display: none;

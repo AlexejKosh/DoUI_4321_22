@@ -14,38 +14,33 @@ export const tasks = [
         title: 'Выучить Life on Mars? на фортепиано',
         status: 'backlog',
     },
-    {
+        {
         id: '4',
         title: 'Делать домашку по РПИ',
-        status: 'processing',
+        status: 'done',
     },
     {
         id: '5',
-        title: 'Отрастить волосы длиннее Джорджа Харрисона',
-        status: 'processing',
-    },
-    {
-        id: '6',
         title: 'Записать сингл',
         status: 'done',
     },
     {
-        id: '7',
+        id: '6',
         title: 'Прослушать весь Depeche Mode',
         status: 'done',
     },
     {
-        id: '8',
+        id: '7',
         title: 'Выучить пару песен Rammstein',
-        status: 'done',
+        status: 'bin',
     },
     {
-        id: '9',
+        id: '8',
         title: 'Следовать расписанию',
         status: 'bin'
     },
     {
-        id: '10',
+        id: '9',
         title: 'Отдохнуть',
         status: 'bin'
     }
