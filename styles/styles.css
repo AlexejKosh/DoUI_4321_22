@@ -173,3 +173,9 @@ main {
   cursor: pointer;
   transition: 0.2s;
 }
+
+.clear-button:disabled {
+  background-color: #ebcaca;
+  color: white;
+  cursor: default
+}
