@@ -52,7 +52,8 @@ export default class TaskBoardPresenter {
 }
 
   #renderTasksList(status, container) {
-    const taskListComponent = new TaskListComponent({title: StatusLabel[status], status});
+
+    const taskListComponent = new TaskListComponent({title: StatusLabel[status], status: status, onTaskDrop:this.#handleTaskDrop.bind(this)});
     render(taskListComponent, container);
 
     const taskListContainer = taskListComponent.element.querySelector('.task-list');
@@ -77,6 +78,10 @@ export default class TaskBoardPresenter {
     for (const status of Object.values(Status)) {
       this.#renderTasksList(status, this.#tasksBoardComponent.element);
     }
+  }
+
+  #handleTaskDrop(taskId, newStatus, insertionId) {
+    this.#tasksModel.updateTaskStatus(taskId, newStatus, insertionId);
   }
 
   createTask() {

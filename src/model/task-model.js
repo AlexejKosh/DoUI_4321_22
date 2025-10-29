@@ -24,6 +24,31 @@ export default class TaskModel {
     return newTask;
   }
 
+  updateTaskStatus(taskId, newStatus, insertionIndex) {
+    const idx = this.#boardTasks.findIndex(task => task.id === taskId);
+    if (idx === -1) {
+      return;
+    }
+
+    const [task] = this.#boardTasks.splice(idx, 1);
+    task.status = newStatus;
+
+    let count = 0;
+    let insertAt = this.#boardTasks.length;
+    for (let i = 0; i < this.#boardTasks.length; i++) {
+      if (this.#boardTasks[i].status === newStatus) {
+        if (count === insertionIndex) {
+          insertAt = i;
+          break;
+        }
+        count++;
+      }
+    }
+
+    this.#boardTasks.splice(insertAt, 0, task);
+    this._notifyObservers();
+  }
+
   clearBin() {
     this.#boardTasks = this.#boardTasks.filter(task => task.status !== 'bin');
     this._notifyObservers();
