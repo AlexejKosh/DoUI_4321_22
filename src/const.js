@@ -12,4 +12,17 @@ const StatusLabel = {
     [Status.BIN]: `Корзина`
 }
 
-export {Status, StatusLabel};
+const UserAction = {
+  UPDATE_TASK: 'UPDATE_TASK',
+  ADD_TASK: 'ADD_TASK',
+  DELETE_TASK: 'DELETE_TASK'
+};
+
+const UpdateType = {
+  PATCH: 'PATCH',
+  MAJOR: 'MAJOR',
+  MINOR: 'MINOR',
+  INIT: 'INIT'
+};
+
+export {Status, StatusLabel, UserAction, UpdateType};

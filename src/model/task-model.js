@@ -1,9 +1,29 @@
-import { tasks } from '../mock/task.js';
 import { generateID } from '../utils.js';
+import Observable from '../framework/observable.js';
+import { Status, UpdateType, UserAction } from '../const.js';
 
-export default class TaskModel {
-  #boardTasks = tasks;
-  #observers = [];
+export default class TaskModel extends Observable {
+  #tasksApiService = null;
+  #boardTasks = [];
+
+  constructor({tasksApiService}) {
+    super();
+    this.#tasksApiService = tasksApiService;
+
+    this.#tasksApiService.tasks.then((tasks) => {
+      console.log(tasks);
+    });
+  }
+
+  async init() {
+    try {
+      const tasks = await this.#tasksApiService.tasks;
+      this.#boardTasks = tasks;
+    } catch(err) {
+      this.#boardTasks = [];
+    }
+    this._notify(UpdateType.INIT);
+  }
 
   get tasks() {
     return this.#boardTasks;
@@ -13,24 +33,29 @@ export default class TaskModel {
     return this.#boardTasks.filter(task => task.status === status);
   }
 
-  addTask(title) {
+  async addTask(title) {
     const newTask = {
       title,
       status: 'backlog',
       id: generateID()
     };
-    this.#boardTasks.push(newTask);
-    this._notifyObservers();
-    return newTask;
+    try {
+      const createdTask = await this.#tasksApiService.addTask(newTask);
+      this.#boardTasks.push(createdTask);
+      this._notify(UserAction.ADD_TASK, createdTask);
+      return createdTask;
+    } catch (err) {
+      console.error('Ошибка при добавлении задачи на сервер:', err);
+      throw err;
+    }
   }
 
-  updateTaskStatus(taskId, newStatus, insertionIndex) {
+  async updateTaskStatus(taskId, newStatus, insertionIndex) {
     const idx = this.#boardTasks.findIndex(task => task.id === taskId);
-    if (idx === -1) {
-      return;
-    }
+    if (idx === -1) return;
 
     const [task] = this.#boardTasks.splice(idx, 1);
+    const previousStatus = task.status;
     task.status = newStatus;
 
     let count = 0;
@@ -44,25 +69,30 @@ export default class TaskModel {
         count++;
       }
     }
-
     this.#boardTasks.splice(insertAt, 0, task);
-    this._notifyObservers();
+    this._notify(UserAction.UPDATE_TASK, task);
+
+    try {
+      const updatedTask = await this.#tasksApiService.updateTask(task);
+      Object.assign(task, updatedTask);
+    } catch (err) {
+      console.error('Ошибка при обновлении статуса задачи на сервере:', err);
+      task.status = previousStatus;
+    }
   }
 
-  clearBin() {
-    this.#boardTasks = this.#boardTasks.filter(task => task.status !== 'bin');
-    this._notifyObservers();
-  }
 
-  addObserver(observer) {
-    this.#observers.push(observer);
-  }
+  async clearBin() {
+    const binTasks = this.#boardTasks.filter(task => task.status === 'bin');
 
-  removeObserver(observer) {
-    this.#observers = this.#observers.filter((obs) => obs !== observer);
-  }
+    try {
+      await Promise.all(binTasks.map(task => this.#tasksApiService.deleteTask(task.id)));
 
-  _notifyObservers() {
-    this.#observers.forEach((observer) => observer());
+      this.#boardTasks = this.#boardTasks.filter(task => task.status !== 'bin');
+      this._notify(UserAction.DELETE_TASK, { status: 'bin' });
+    } catch (err) {
+      console.error('Ошибка при удалении задач из корзины на сервере:', err);
+      throw err;
+    }
   }
 }

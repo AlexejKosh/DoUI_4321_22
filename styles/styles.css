@@ -61,6 +61,12 @@ main {
   min-height: 100px;
 }
 
+.no-tasks {
+  margin: 0px auto;
+  color: #9e2abb;
+  font-size: 20px;
+}
+
 .task-type {
   font-size: 18px;
   padding: 20px 30px;

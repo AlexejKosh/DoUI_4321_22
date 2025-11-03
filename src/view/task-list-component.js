@@ -34,8 +34,7 @@ export default class TaskListComponent extends AbstractComponent {
       event.preventDefault();
       const taskID = event.dataTransfer.getData('text/plain');
 
-      const listOfTasks = Array.from(container.querySelector('.task-list'));
-
+      const listOfTasks = Array.from(container.querySelectorAll('.task-list > *'));
       const filteredTasks = listOfTasks.filter((ch) => ch.dataset.id !== taskID);
 
       const mouseY = event.clientY;
